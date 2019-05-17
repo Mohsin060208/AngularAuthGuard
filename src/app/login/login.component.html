@@ -1,0 +1,25 @@
+<div class="container-fluid"> 
+  <h1>Login</h1>
+<form (submit)="onSubmit(email.value, pass.value)">
+  <div class="form-group">
+<div class="row">
+  <div class="col-4">
+    <label for="exampleInputEmail1">Email address</label> <br>
+    <input type="email" class="form-control" #email aria-describedby="emailHelp" placeholder="Enter email" required (input)="checkEmail($event, em)">
+  </div>
+  </div>
+  <p #em [innerText] = "EmailCheck"></p>
+  </div>
+  <div class="form-group">
+      <div class="row">
+          <div class="col-4">
+    <label for="exampleInputPassword1">Password</label> <br>
+    <input type="password" class="form-control" #pass placeholder="Password" required (input)="checkPassword($event,ps)">
+  </div>
+  </div>
+  <p #ps [innerText] = "PassCheck"></p>
+</div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+<router-outlet></router-outlet>

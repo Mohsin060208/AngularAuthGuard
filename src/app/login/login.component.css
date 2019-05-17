@@ -1,0 +1,9 @@
+p{
+  font-size: 14px;
+}
+.invalid{
+  color: red;
+}
+.valid{
+  color: green;
+}
