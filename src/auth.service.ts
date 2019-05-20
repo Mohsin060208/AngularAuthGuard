@@ -6,14 +6,24 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor() { }
-
-  validate(email: string, pass: string){
-    if(email == "123@outlook.com" && pass == "12439"){
-      localStorage.setItem("email","123@outlook.com");
-      return true;
-    }
-    else{
-      return false;
-    }
+validateEmail(email:string){
+  if(email == "abc@outlook.com"){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+validatePass(pass:string){
+if(pass == "Cortana1809"){
+  return true;
+  }
+else{
+  return false;
+  } 
+}
+  storeSession(email:string){
+  sessionStorage.setItem("email","'"+email+"'");
+  return true;
   }
 }
