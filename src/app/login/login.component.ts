@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   passMatch: boolean;
   pass: string;
   email: string;
- 
+ logged: boolean;
   constructor(private router: Router, private service: AuthService) { }
   ngOnInit() {
     this.LoginForm = new FormGroup({
