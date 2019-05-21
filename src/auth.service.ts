@@ -15,7 +15,7 @@ validateEmail(email:string){
   }
 }
 validatePass(pass:string){
-if(pass == "Cortana1809"){
+if(pass == "abcd1234"){
   return true;
   }
 else{

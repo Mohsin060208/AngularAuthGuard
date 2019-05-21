@@ -7,7 +7,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '../auth.guard';
-import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 @NgModule({
@@ -15,8 +14,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    HomeComponent,
-    SignUpComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,    
