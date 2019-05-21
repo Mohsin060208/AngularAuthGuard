@@ -1,43 +1,46 @@
-<div class="container-fluid jumbotron"> 
-  <h1>Login</h1>
-  <br>
-  <form (ngSubmit)="onSubmit()" [formGroup]="Form">
-<div class="form-group">
-  <div class="row">
-    <div class="col-md-5">
-  <input id="email" class="form-control" placeholder="Enter email" required formControlName="email" (input)="checkEmail($event, em)">
-  <div [hidden]="!emailReq">*Enter Email. (required)</div>
-  <div class="invalid" [hidden]="!emailInvalid">Email is not valid</div>
-  <div class="invalid" *ngIf="!emailMatch">Email does not match to any user.</div>
-        </div>
-        <div class="col-md-1">
-          <p [hidden]="!emailReq"> ⚠</p>
-          <p [hidden]="!emailInvalid"> 📛</p>
-          <p *ngIf="!emailMatch"> ❌</p>
-        </div>
+<div class="jumbotron">
+    <div class="container"> 
+        <h1>Login</h1>
+        <br>
+        <form (ngSubmit)="onSubmit()" [formGroup]="LoginForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+        <input id="email" class="form-control" placeholder="Enter email" required formControlName="email" (input)="checkEmail($event,ps)">
+        <div [hidden]="!emailReq">*Enter Email. (required)</div>
+        <div class="invalid" [hidden]="!emailInvalid">Email is not valid</div>
+        <div class="invalid" [hidden]="!emailError">Email does not match to any user.</div>
+              </div>
+              <div class="col-md-1">
+                <p [hidden]="!emailReq"> ⚠</p>
+                <p [hidden]="!emailInvalid"> 📛</p>
+                <p [hidden]="!emailError"> ❌</p>
+                <p [hidden]="!emailMatch"> ✔</p>
+              </div>
+            </div>
       </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+                 <input type="password" class="form-control" id="pass" formControlName="pass" placeholder="Enter Password" required (input)="checkPassword($event,ps)">
+                 <div [hidden]="!passReq">*Enter Password. (required)</div>
+               <div class="invalid" [hidden]="!passInvalid">Password should contain at least one lower case letter, one upper case letter, one digit and no spaces.</div>
+               <div class="invalid" [hidden]="!passLength">Password should contain minimum 8 characters.</div>
+               <div class="invalid" *ngIf="!passMatch">Password is not correct</div>
+               </div>
+               <div class="col-md-1">
+                   <p [hidden]="!passReq"> ⚠</p>
+                   <p *ngIf="!passMatch"> ❌</p>
+                   <p [hidden]="!passInvalid"> 📛</p>
+                   <p [hidden]="!passLength"> 📛</p>
+                 </div>
+      </div>
+      </div>
+      <br>
+        <button type="submit" class="btn btn-primary">Sign-In</button>
+      </form>
+      <br>
+      No Account? Create one <a class="inline" [routerLink]="['/signUp']"  routerLinkActive="active">here</a>
+      </div>
+      <router-outlet></router-outlet>
 </div>
-<div class="form-group">
-  <div class="row">
-    <div class="col-md-5">
-           <input type="password" class="form-control" id="pass" formControlName="pass" placeholder="Enter Password" required (input)="checkPassword($event,ps)">
-           <div [hidden]="!passReq">*Enter Password. (required)</div>
-         <div class="invalid" [hidden]="!passInvalid">Password should contain at least one lower case letter, one upper case letter, one digit and no spaces.</div>
-         <div class="invalid" [hidden]="!passLength">Password should contain minimum 8 characters.</div>
-         <div class="invalid" *ngIf="!passMatch">Password is not correct</div>
-         </div>
-         <div class="col-md-1">
-             <p [hidden]="!passReq"> ⚠</p>
-             <p *ngIf="!passMatch"> ❌</p>
-             <p [hidden]="!passInvalid"> 📛</p>
-             <p [hidden]="!passLength"> 📛</p>
-           </div>
-</div>
-</div>
-<br>
-  <button type="submit" class="btn btn-primary">Sign-In</button>
-</form>
-<br>
-No Account? Create one <a class="inline" [routerLink]="['/signUp']"  routerLinkActive="active">here</a>
-</div>
-<router-outlet></router-outlet>

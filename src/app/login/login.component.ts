@@ -8,13 +8,14 @@ import { FormGroup, FormControl, Validators, EmailValidator } from '@angular/for
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-Form: FormGroup;
+LoginForm: FormGroup;
 submitted = false;
 pass : string;
 email: string;
 emailReq = false;
 emailInvalid = false;
-emailMatch = true;
+emailError = false;
+emailMatch = false;
 passReq = false;
 passInvalid = false;
 passMatch = true;
@@ -23,7 +24,7 @@ passLength = false;
   emailValidator: boolean;
     constructor(private router:Router, private service: AuthService) { }
     ngOnInit() {
-      this.Form = new FormGroup({
+      this.LoginForm = new FormGroup({
         email: new FormControl('', [
           Validators.required,Validators.email
         ]),
@@ -32,36 +33,61 @@ passLength = false;
         ])})
   }
     onSubmit() { 
-      if(this.Form.controls['email'].hasError('required')){
+      if(this.LoginForm.controls['email'].hasError('required')){
+        this.emailError = false;
+        this.emailMatch = false;
+        this.emailInvalid = false;
         return this.emailReq = true;
       }
-      else this.emailReq = false;
-      if(this.Form.controls['email'].hasError('email')){
+      else {
+        this.emailReq = false;
+        this.emailError = false;
+        this.emailMatch = false;
+        this.emailInvalid = false;
+      }
+      if(this.LoginForm.controls['email'].hasError('email')){
         return this.emailInvalid = true;
       }
-      else this.emailInvalid =false;
-      this.emailValidator = this.service.validateEmail(this.email);
-      if(!EmailValidator){
-        return this.emailMatch = false;
+      else {
+        this.emailInvalid = false;
       }
-      else this.emailMatch = true;
-      if(this.Form.controls['pass'].hasError('required')){
+      this.emailValidator = this.service.validateEmail(this.email);
+      if(!this.emailValidator){
+        return this.emailError = true;
+      }
+      else {
+        this.emailError = false;
+        this.emailMatch = true;
+      }
+      if(this.LoginForm.controls['pass'].hasError('required')){
+        this.passInvalid = false;
+        this.passLength = false;
         return this.passReq = true;
       }
-      else this.passReq = false;
-      if(this.Form.controls['pass'].hasError('pattern')){
+      else {
+        this.passInvalid = false;
+        this.passLength = false;
+        this.passReq = false;
+      }
+      if(this.LoginForm.controls['pass'].hasError('pattern')){
         return this.passInvalid = true;
       }
-      else this.passInvalid = false;
-      if(this.Form.controls['pass'].hasError('minlength')){
+      else {
+        this.passInvalid = false;
+      }
+      if(this.LoginForm.controls['pass'].hasError('minlength')){
         return this.passLength = true;
       }
-      else this.passLength = false;
+      else {
+        this.passLength = false;
+      }
       this.passValidator = this.service.validatePass(this.pass);
       if(!this.passValidator){
         return this.passMatch = false;
       }
-      else this.passMatch = true;
+      else {
+        this.passMatch = true;
+    }
       if(this.emailMatch == true && this.passMatch == true){
         this.submitted = this.service.storeSession(this.email);
         if(this.submitted == true){
@@ -73,7 +99,7 @@ passLength = false;
         }
       }
 else{
-  // alert("Please fill in the form with valid credentials.");
+  // alert("Please fill in the LoginForm with valid credentials.");
   this.router.navigate(['/login']);
 }
     }
