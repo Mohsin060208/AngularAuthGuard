@@ -7,32 +7,24 @@
         <div class="row">
           <div class="col-md-5">
         <input id="email" class="form-control" placeholder="Enter email" required formControlName="email" (input)="checkEmail($event,ps)">
-        <div [hidden]="!emailReq">*Enter Email. (required)</div>
-        <div class="invalid" [hidden]="!emailInvalid">Email is not valid</div>
-        <div class="invalid" [hidden]="!emailError">Email does not match to any user.</div>
-              </div>
-              <div class="col-md-1">
-                <p [hidden]="!emailReq"> ⚠</p>
-                <p [hidden]="!emailInvalid"> 📛</p>
-                <p [hidden]="!emailError"> ❌</p>
-                <p [hidden]="!emailMatch"> ✔</p>
-              </div>
-            </div>
+        <div *ngIf="LoginForm.controls['email'].hasError('required') && submitted">*Enter Email. (required)</div>
+        <div class="invalid" *ngIf="LoginForm.controls['email'].hasError('email') && submitted">Email is not valid</div>
       </div>
+      <div class="col-md-1">
+        <p *ngIf="LoginForm.controls['email'].hasError('required') && submitted"> ⚠</p>
+        <p *ngIf="LoginForm.controls['email'].hasError('email') && submitted"> ❌</p>
+      </div>
+    </div>
+    </div>      
       <div class="form-group">
         <div class="row">
           <div class="col-md-5">
                  <input type="password" class="form-control" id="pass" formControlName="pass" placeholder="Enter Password" required (input)="checkPassword($event,ps)">
-                 <div [hidden]="!passReq">*Enter Password. (required)</div>
-               <div class="invalid" [hidden]="!passInvalid">Password should contain at least one lower case letter, one upper case letter, one digit and no spaces.</div>
-               <div class="invalid" [hidden]="!passLength">Password should contain minimum 8 characters.</div>
-               <div class="invalid" *ngIf="!passMatch">Password is not correct</div>
+                 <div *ngIf="LoginForm.controls['pass'].hasError('required') && submitted">*Enter Password. (required)</div>
+               <div class="invalid" *ngIf="passError">Password is not correct</div>
                </div>
                <div class="col-md-1">
-                   <p [hidden]="!passReq"> ⚠</p>
-                   <p *ngIf="!passMatch"> ❌</p>
-                   <p [hidden]="!passInvalid"> 📛</p>
-                   <p [hidden]="!passLength"> 📛</p>
+                   <p *ngIf="LoginForm.controls['pass'].hasError('required') && submitted"> ⚠</p>
                  </div>
       </div>
       </div>
