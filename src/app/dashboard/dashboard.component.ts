@@ -10,6 +10,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   }
-  
 
+  onSignOut() {
+    console.log("Logged out");
+  }
 }
